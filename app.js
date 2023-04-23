@@ -93,6 +93,31 @@ app.route("/articles/:articleTitle")
             .catch((err) => {
                 console.log(err);
             });
+    })
+
+    .patch((req, res) => {
+        Article.updateOne(
+            { title: req.params.articleTitle },
+            { $set: req.body }
+        )
+            .then(() => {
+                res.send("The requested part of the article is succesfully updated.")
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    })
+
+    .delete((req, res) => {
+        Article.deleteOne(
+            { title: req.params.articleTitle }
+        )
+            .then(() => {
+                res.send("Article is succesfully deleted.")
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     });
 
 app.listen(port, () => {
